@@ -1,35 +1,27 @@
-
 <template>
   <div class="bg-black">
     <header class="text-purple-700 text-center"> Attendo </header>
-    <ul class=" text-purple-700">
-      <li> <RouterLink :to = "{name:'accueil'}">Acceuil</RouterLink></li>
-      <li> <RouterLink :to ="{name:'apropos'}">Apropos</RouterLink></li>
-      <li> <RouterLink :to="{name:'sessions'}">session</RouterLink></li>
-    </ul>
+
+    <nav class="text-purple-700 p-4">
+      <RouterLink :to="{ name: 'accueil' }" class="mr-4">Accueil</RouterLink>
+      <RouterLink :to="{ name: 'apropos' }" class="mr-4">À propos</RouterLink>
+      <RouterLink :to="{ name: 'sessions' }">Sessions</RouterLink>
+    </nav>
+
+
+    <AuthGoogle />
   </div>
-  <button @click = "connexionButton" > Connexion avec Google </button>
 </template>
 
-<script >
+<script>
+import AuthGoogle from "@/Components/AuthGoogle.vue";
 
 export default {
-  computed: {
+  components: {
+    AuthGoogle,
   },
-  data (){
-    return {
-
-    };
-  },
-  methods: {
-    connexionButton(){
-      console.log("Connexion");
-    }
-  }
 };
-
 </script>
-
 
 <style scoped>
 
