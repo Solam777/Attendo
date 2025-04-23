@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Accueil from "@/views/Accueil.vue";
 import Apropos from "@/views/Apropos.vue";
-import Sessions from "@/views/Sessions.vue";
+import SessionsVue from "@/views/Sessions-vue.vue";
 
 
 const router = createRouter({
@@ -10,7 +10,7 @@ const router = createRouter({
   routes: [
     {path: '/',  name: 'accueil' , component: Accueil},
     {path: '/apropos', name: 'apropos', component: Apropos },
-    {path: '/sessions', name: 'sessions', component: Sessions},
+    {path: '/sessions', name: 'sessions', component: SessionsVue},
   ],
 })
 
