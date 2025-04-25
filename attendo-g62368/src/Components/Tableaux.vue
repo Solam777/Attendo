@@ -7,7 +7,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="(row, index) in rows" :key="index" class="border-t border-gray-400">
+    <tr v-for="(row, index) in rows" :key="index" @click="$emit('row-click',row)" class=" cursor-pointer border-t border-gray-400">
       <td v-for="attr in attributes" :key="attr" class="p-2 text-center">
         {{ row[attr] }}
       </td>

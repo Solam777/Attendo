@@ -5,6 +5,7 @@
       :headers="['ID', 'Nom']"
       :rows="sessions"
       :attributes="['id', 'label']"
+      @row-click="goToSession"
     />
   </div>
 </template>
@@ -20,6 +21,11 @@ export default {
     sessions: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    goToSession(session) {
+      this.$router.push({ name: 'detailSession', params: { label: session.label } });
     }
   }
 };

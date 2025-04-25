@@ -49,7 +49,11 @@ export default {
     },
     async logout() {
       const { error } = await supabase.auth.signOut();
-      if (error) console.error('Erreur de déconnexion:', error.message);
+      if (error) {console.error('Erreur de déconnexion:', error.message);}
+    else
+      {
+        this.$router.push("/")
+      }
     },
   },
 };
