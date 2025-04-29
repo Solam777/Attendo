@@ -6,6 +6,7 @@
       :headers="['UE']"
       :rows="ues"
       :attributes="['nom']"
+      @row-click='goToEpreuve'
     />
 
     <div class="mt-6 border-t pt-4">
@@ -67,6 +68,15 @@ export default {
       this.ues = await getUEsBySessionId(this.sessionId);
       this.availableUEs = await getAvailableUEs(this.sessionId);
       this.selectedUE = '';
+    },
+    goToEpreuve(ue) {
+      this.$router.push({
+        name: 'epreuves',
+        params: {
+          sessionLabel: this.label,
+          ueId: ue.id || ue.nom
+        }
+      });
     }
   }
 };

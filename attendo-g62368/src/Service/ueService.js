@@ -46,8 +46,6 @@ export async function getAvailableUEs(sessionId) {
   return allUEs.filter(ue => !linkedIds.has(ue.ue));
 }
 
-
 export async function addUEToSession(sessionId, ueId) {
   return await supabase.from('session_compo').insert([{ session: sessionId, ue: ueId }]);
 }
-

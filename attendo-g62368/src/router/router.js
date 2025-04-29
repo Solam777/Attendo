@@ -4,6 +4,7 @@ import Accueil from "@/views/Accueil.vue";
 import Apropos from "@/views/Apropos.vue";
 import SessionsVue from "@/views/Sessions-vue.vue";
 import DetailSession from "@/Components/DetailSession.vue";
+import epreuves from "@/Components/Epreuves.vue";
 
 
 const router = createRouter({
@@ -13,6 +14,7 @@ const router = createRouter({
     {path: '/apropos', name: 'apropos', component: Apropos },
     {path: '/sessions', name: 'sessions', component: SessionsVue },
     {path: '/session/:label', name: 'detailSession', component: DetailSession, props: true},
+    {path: '/session/:sessionLabel/ue/:ueId/epreuves', name: 'epreuves', component: epreuves, props: true},
   ],
 })
 

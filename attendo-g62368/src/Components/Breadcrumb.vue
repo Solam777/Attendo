@@ -7,7 +7,7 @@
     <template v-if="currentRouteName !== 'accueil'">
       <span class="mx-2 text-gray-500"> > </span>
 
-      <template v-if="currentRouteName === 'sessions' || currentRouteName === 'detailSession'">
+      <template v-if="currentRouteName === 'sessions' || currentRouteName === 'detailSession'|| currentRouteName === 'epreuves'">
         <RouterLink :to="{ name: 'sessions' }" class="text-blue-500 hover:text-blue-700">
           Sessions
         </RouterLink>
@@ -17,10 +17,21 @@
         <span class="text-gray-700">À propos</span>
       </template>
 
-      <template v-if="currentRouteName === 'detailSession'">
+      <template v-if="currentRouteName === 'detailSession'|| currentRouteName === 'epreuves'">
         <span class="mx-2 text-gray-500"> > </span>
-        <span class="text-gray-700">{{ $route.params.label }}</span>
+        <RouterLink
+          :to="{ name: 'detailSession', params: { label: $route.params.sessionLabel || $route.params.label } }"
+          class="text-blue-500 hover:text-blue-700"
+        >
+          {{ $route.params.sessionLabel || $route.params.label }}
+        </RouterLink>
       </template>
+
+      <template v-if="currentRouteName === 'epreuves'">
+        <span class="mx-2 text-gray-500"> > </span>
+        <span class="text-gray-700">Épreuves {{ $route.params.ueId }}</span>
+      </template>
+
     </template>
   </div>
 </template>

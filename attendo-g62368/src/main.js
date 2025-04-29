@@ -5,7 +5,7 @@ import { createPinia } from 'pinia'
 
 import router from './router/router.js'
 import App from "@/App.vue";
-import DetailSession from "@/Components/DetailSession.vue";
+
 
 
 const app = createApp(App)
