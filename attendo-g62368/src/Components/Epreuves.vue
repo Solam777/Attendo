@@ -4,11 +4,12 @@
 
     <div class="grid grid-cols-2 gap-4 mb-6">
 
-      <div v-for="epreuve in epreuves" :key="epreuve.id" >
+      <div v-for="epreuve in epreuves" :key="epreuve.id" @click = 'gotolocaux(epreuve.label)' >
       <carte-epreuve :name-epreuve="epreuve.label" />
         <button @click="deleteEpreuve(epreuve.id)" class="text-red-600 hover:text-red-800">
           Supprimer
         </button>
+
       </div>
     </div>
     <div class="mt-8 border-t pt-4">
@@ -34,7 +35,13 @@
 
 <script>
 import { getOneSession } from "@/Service/listSessionsService.js";
-import { getSessionCompoId, getEpreuvesBySessionCompo, addEpreuveService, deleteEpreuveService } from "@/Service/epreuveService.js";
+import {
+  getSessionCompoId,
+  getEpreuvesBySessionCompo,
+  addEpreuveService,
+  deleteEpreuveService,
+  isInEpreuve, getOnEpreuve
+} from "@/Service/epreuveService.js";
 import CarteEpreuve from "@/Components/CarteEpreuve.vue";
 
 export default {
@@ -62,9 +69,7 @@ export default {
     };
   },
   computed: {
-    isFormValid() {
-      return this.nouvelleEpreuve.label.trim() !== '' && this.nouvelleEpreuve.type !== '';
-    }
+
   },
   async mounted() {
     await this.loadSessionInfo();
@@ -88,17 +93,45 @@ export default {
     },
 
     async addEpreuve() {
-      if (!this.isFormValid || !this.sessionCompoId) return;
+      if (!this.nouvelleEpreuve.label.trim() || !this.sessionCompoId) return;
+
+      const existeDeja = await isInEpreuve(this.nouvelleEpreuve.label);
+      if (existeDeja) {
+        alert("Ce label existe déjà dans un événement.");
+        return;
+      }
+
       await addEpreuveService(this.sessionCompoId, this.nouvelleEpreuve.label);
       await this.loadEpreuves();
       this.nouvelleEpreuve.label = '';
     },
-
     async deleteEpreuve(epreuveId) {
       await deleteEpreuveService(epreuveId);
       await this.loadEpreuves();
     },
 
+    async gotolocaux(epreuve) {
+      const eupreuveData = await getOnEpreuve(epreuve);
+      const eupreuveID = eupreuveData[0]?.id;
+      const eupreuveLabel = eupreuveData[0]?.label;
+
+      console.log("epreuveData"+eupreuveData[0].label);
+
+      if (!eupreuveID) {
+        console.error("Aucun ID trouvé pour l'épreuve", epreuve);
+        return;
+      }
+      this.$router.push({
+        name: "locaux",
+        params: {
+          ueId: this.ueId, //nom de la metiere
+          epreuveId: Number(eupreuveID), //id epreuve
+          epreuveName: eupreuveLabel,
+
+        }
+      });
+
+    }
   }
 };
 </script>

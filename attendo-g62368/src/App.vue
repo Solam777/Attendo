@@ -1,6 +1,6 @@
 <template>
   <div class="bg-black">
-    <header class="text-purple-700 text-center text-xl"> Attendo </header>
+    <header class="text-purple-700 text-center text-4xl"> Attendo </header>
 
     <nav class="text-purple-700 p-4">
       <RouterLink :to="{ name: 'accueil' }" class="mr-4">Accueil</RouterLink>

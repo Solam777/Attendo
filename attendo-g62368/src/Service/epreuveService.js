@@ -20,7 +20,8 @@ export async function getEpreuvesBySessionCompo(sessionCompoId) {
   const { data, error } = await supabase
     .from('event')
     .select('*')
-    .eq('session_compo', sessionCompoId);
+    .eq('session_compo', sessionCompoId)
+
 
   if (error) {
     console.error("Erreur lors de la récupération des épreuves:", error);
@@ -60,4 +61,28 @@ export async function deleteEpreuveService(epreuveId) {
   }
 
   return true;
+}
+export async function isInEpreuve(eupreuveLabel) {
+  const { data, error } = await supabase
+    .from('event')
+    .select('id')
+    .eq('label', eupreuveLabel);
+
+  if (error) {
+    console.error("Erreur Supabase:", error);
+    return true;
+  }
+
+  return data.length > 0; // true = present
+}
+
+export async function getOnEpreuve(eupreuveLabel){
+  const { data, error } = await supabase
+    .from('event')
+    .select()
+    .eq('label',eupreuveLabel)
+  if (error) {
+    console.error("erreur lors de recup de l'id de l'event",error);
+  }
+  return data
 }
