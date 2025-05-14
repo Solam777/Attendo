@@ -6,6 +6,7 @@ import SessionsVue from "@/views/Sessions-vue.vue";
 import DetailSession from "@/Components/DetailSession.vue";
 import epreuves from "@/Components/Epreuves.vue";
 import locaux from "@/Components/Locaux.vue";
+import Presence from "@/Components/Presence.vue";
 
 
 const router = createRouter({
@@ -17,7 +18,7 @@ const router = createRouter({
     {path: '/session/:label', name: 'detailSession', component: DetailSession, props: true},
     {path: '/session/:sessionLabel/ue/:ueId/epreuves', name: 'epreuves', component: epreuves, props: true},
     { path: '/session/:sessionLabel/ue/:ueId/epreuves/:epreuveId/:epreuveName/locaux', name: 'locaux', component: locaux, props: true },
-
+    { path: '/session/:sessionLabel/ue/:ueId/epreuves/:epreuveId/:epreuveName/locaux/:id/:localNum', name: 'presence', component: Presence, props: true },
   ],
 })
 

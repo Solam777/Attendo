@@ -7,7 +7,7 @@
     <template v-if="currentRouteName !== 'accueil'">
       <span class="mx-2 text-gray-500"> > </span>
 
-      <template v-if="currentRouteName === 'sessions' || currentRouteName === 'detailSession'|| currentRouteName === 'epreuves' || currentRouteName === 'locaux'">
+      <template v-if="['sessions', 'detailSession', 'epreuves', 'locaux', 'presence'].includes(currentRouteName)">
         <RouterLink :to="{ name: 'sessions' }" class="text-blue-500 hover:text-blue-700">
           Sessions
         </RouterLink>
@@ -17,7 +17,7 @@
         <span class="text-gray-700">À propos</span>
       </template>
 
-      <template v-if="currentRouteName === 'detailSession'|| currentRouteName === 'epreuves'|| currentRouteName === 'locaux'">
+      <template v-if="['detailSession', 'epreuves', 'locaux', 'presence'].includes(currentRouteName)">
         <span class="mx-2 text-gray-500"> > </span>
         <RouterLink
           :to="{ name: 'detailSession', params: { label: $route.params.sessionLabel || $route.params.label } }"
@@ -27,7 +27,7 @@
         </RouterLink>
       </template>
 
-      <template v-if="currentRouteName === 'epreuves' || currentRouteName === 'locaux'">
+      <template v-if="['epreuves', 'locaux', 'presence'].includes(currentRouteName)">
         <span class="mx-2 text-gray-500"> > </span>
         <RouterLink
           :to="{
@@ -43,9 +43,29 @@
         </RouterLink>
       </template>
 
-      <template v-if="currentRouteName === 'locaux'" >
+      <template v-if="['locaux', 'presence'].includes(currentRouteName)">
         <span class="mx-2 text-gray-500"> > </span>
-        <span class="text-gray-700"> {{ $route.params.epreuveName}}</span>
+        <RouterLink
+          :to="{
+            name: 'locaux',
+            params: {
+              sessionLabel: $route.params.sessionLabel,
+              ueId: $route.params.ueId,
+              epreuveId: $route.params.epreuveId,
+              epreuveName: $route.params.epreuveName
+            }
+          }"
+          class="text-blue-500 hover:text-blue-700"
+        >
+          {{ $route.params.epreuveName }}
+        </RouterLink>
+      </template>
+
+      <template v-if="currentRouteName === 'presence'">
+        <span class="mx-2 text-gray-500"> > </span>
+        <span class="text-gray-700">
+          {{ $route.params.localNum }}
+        </span>
       </template>
 
     </template>

@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import { addSession } from "@/Service/addSessionService.js";
+
+import {addSession} from "@/Service/SessionService.js";
 
 export default {
   data() {

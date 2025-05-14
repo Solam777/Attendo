@@ -58,3 +58,15 @@ export async function getLocalNotAdded(eventID) {
   return notAddedLocals;
 }
 
+export async function getSupervisor (local){
+  const {data, error} = await supabase
+    .from('examination_room')
+    .select('supervisor')
+    .eq('room', local)
+
+  if (error) {
+    console.error("Erreur lors de la recup du supervisor :", error);
+  }
+  return data[0].supervisor;
+}
+

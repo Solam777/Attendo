@@ -1,5 +1,6 @@
 <script>
-import {getCapacityRoom} from "@/Service/LocalService.js";
+import {getCapacityRoom, getSupervisor} from "@/Service/LocalService.js";
+import {getAllStudentInLocal} from "@/Service/PresenceService.js"
 
 export default {
   props: {
@@ -10,16 +11,26 @@ export default {
   },
   data(){
     return {
-      capacity : null
+      capacity : null,
+      totalStudent : null,
+      supervisors : null,
     }
   },
   methods: {
-    async  loadCapacite(){
+    async loadCapacite(){
       this.capacity = await getCapacityRoom(this.local.room)
+    },
+    async getStudentNumber(){
+      this.totalStudent = await getAllStudentInLocal();
+    },
+    async loadSupervisor (){
+      this.supervisors = await getSupervisor(this.local.room);
     }
   },
   async mounted(){
     await this.loadCapacite();
+    await this.getStudentNumber();
+    await this.loadSupervisor();
   }
 };
 </script>
@@ -28,11 +39,11 @@ export default {
   <div class="carte-locaux">
     <div class="top">
       <span class="numero">{{ local.room }}</span>
-      <span class="capacite">0/{{this.capacity}}</span>
+      <span class="capacite">{{ totalStudent }}/{{this.capacity}}</span>
     </div>
     <div class="bottom">
       <div class="role">Surveillant</div>
-      <div class="acronyme">{{ local.surveillant }}</div>
+      <div class="acronyme">{{ this.supervisors }}</div>
     </div>
   </div>
 

@@ -24,8 +24,9 @@
 
 <script>
 import Tableaux from "@/Components/Tableaux.vue";
-import {getOneSession} from "@/Service/listSessionsService.js";
 import { getUEsBySessionId, getAvailableUEs, addUEToSession } from "@/Service/ueService.js";
+
+import {getOneSession} from "@/Service/SessionService.js";
 
 export default {
   components: { Tableaux },

@@ -13,7 +13,8 @@
 import AddSession from "@/Components/AddSessions.vue";
 import ListeSessions from "@/Components/ListeSessions.vue";
 import SuppSessions from "@/Components/SuppSessions.vue";
-import { getSessions } from "@/Service/listSessionsService.js";
+
+import {getSessions} from "@/Service/SessionService.js";
 
 
 export default {

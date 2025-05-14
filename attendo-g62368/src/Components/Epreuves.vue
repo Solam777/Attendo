@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import { getOneSession } from "@/Service/listSessionsService.js";
 import {
   getSessionCompoId,
   getEpreuvesBySessionCompo,
@@ -43,6 +42,8 @@ import {
   isInEpreuve, getOnEpreuve
 } from "@/Service/epreuveService.js";
 import CarteEpreuve from "@/Components/CarteEpreuve.vue";
+
+import {getOneSession} from "@/Service/SessionService.js";
 
 export default {
   components: {CarteEpreuve},

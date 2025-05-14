@@ -15,6 +15,10 @@ export default {
     epreuveName : {
       type: String,
       required: true
+    },
+    sessionLabel: {
+      type: String,
+      required: true
     }
   },
   data(){
@@ -44,8 +48,18 @@ export default {
       this.availableLocal =  await getLocalNotAdded(this.epreuveId);
     },
     gotoLocal(local){
-      console.log("gotolocal",local);
-    }
+      this.$router.push({
+        name: "presence",
+        params:{
+          id: local.id,
+          localNum: local.room,
+          ueId: this.ueId,
+          sessionLabel: this.sessionLabel,
+          epreuveId: this.epreuveId,
+          epreuveName: this.epreuveName
+      }
+      })
+    },
   }
 };
 </script>

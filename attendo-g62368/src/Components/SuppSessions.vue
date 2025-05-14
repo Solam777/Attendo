@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import {removeSession} from "@/Service/removeSessionService.js";
+
+import {removeSession} from "@/Service/SessionService.js";
 export default {
   data() {
     return {

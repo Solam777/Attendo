@@ -7,7 +7,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="(row, index) in rows" :key="index" @click="$emit('row-click',row)" class=" cursor-pointer border-t border-gray-400">
+    <tr v-for="(row, index) in rows"
+        :key="index"
+        :class="{
+      'bg-green-200': isHighlighted(row),
+      'cursor-pointer': true
+       }"
+        @click="$emit('row-click',row)" class=" cursor-pointer border-t border-gray-400">
       <td v-for="attr in attributes" :key="attr" class="p-2 text-center">
         {{ row[attr] }}
       </td>
@@ -23,7 +29,16 @@ export default {
     headers: Array,        // Liste des entêtes (affichage)
     rows: Array,           // Liste d’objets (les données à afficher)
     attributes: Array,     // Liste d’attributs à afficher (clés de l’objet)
+    highlighted: { //
+      type: Array,
+      default: () => []
+    }
   },
+  methods: {
+    isHighlighted(row) {
+      return this.highlighted.some(s => s.matricule === row.matricule);
+    }
+  }
 };
 </script>
 
